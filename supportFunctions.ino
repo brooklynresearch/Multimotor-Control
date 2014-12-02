@@ -27,7 +27,7 @@ void dSPINConfig(void)
   boardA.setAccKVAL(255);           // We'll tinker with these later, if needed.
   boardA.setDecKVAL(255);
   boardA.setRunKVAL(255);
-  boardA.setHoldKVAL(100);           // This controls the holding current; keep it low.
+  boardA.setHoldKVAL(32);           // This controls the holding current; keep it low.
   
  
   boardB.configSyncPin(BUSY_PIN, 0);// BUSY pin low during operations;
@@ -52,7 +52,7 @@ void dSPINConfig(void)
   boardB.setAccKVAL(255);           // We'll tinker with these later, if needed.
   boardB.setDecKVAL(255);
   boardB.setRunKVAL(255);
-  boardB.setHoldKVAL(100);           // This controls the holding current; keep it low.
+  boardB.setHoldKVAL(32);           // This controls the holding current; keep it low.
   
   
   
