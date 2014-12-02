@@ -98,6 +98,14 @@ void loop()
           }
         }
         
+        // All steppers stopped
+        else if(token[0] == 'H'){
+          Serial.print("we have a halt: ");
+          Serial.println(token[0]);
+          stepperSoftStop();
+          token = strtok(NULL, " ");
+        }
+        
         // if not a modal change, then individually
         // addressing steppers with 'S'
         else if(token[0] == 'S'){

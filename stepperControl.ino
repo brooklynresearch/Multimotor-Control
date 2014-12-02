@@ -146,8 +146,13 @@ void boardBTest(){
   
 }
 
+// all steppers are soft stopped
 void stepperSoftStop(){
   boardA.softStop();
+  boardB.softStop();
+  boardC.softStop();
+  boardD.softStop();
+  boardE.softStop();
 }
 
 // Really long function selecting which motor to go to what step
