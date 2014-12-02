@@ -150,6 +150,7 @@ void stepperSoftStop(){
   boardA.softStop();
 }
 
+// Really long function selecting which motor to go to what step
 void motorToPosition(int currentMotor, int targetStep){
   // Giant switch statement because we don't have arrays for some goddamn reason
   Serial.print("Current Motor is: ");
@@ -162,7 +163,8 @@ void motorToPosition(int currentMotor, int targetStep){
       Serial.print("Stepper 0: ");
       Serial.println(currentMotor);
       
-      // movement
+      // logic for how much to reverse or forward depending
+      // on current position and desired position
       if(boardA.getParam(ABS_POS) < targetStep){
         boardA.move(FWD, targetStep - boardA.getParam(ABS_POS));
       }

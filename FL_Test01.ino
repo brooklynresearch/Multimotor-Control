@@ -61,19 +61,13 @@ void setup()
 
 void loop()
 {
-//  byte inByte;
-//  
-//  if(Serial.available() != 0){
-//     inByte = Serial.read();
-//     Serial.print("My Byte: ");
-//     Serial.println(inByte);
-//  }
-//  
+
+  // When a newline is recevied and we have an entire message
   if (stringComplete) {
     Serial.println(inputString);
-    // clear the string:
+    // turn into charArray for processing
     inputString.toCharArray(charBuf,50);
-    token = strtok(charBuf," ");
+    token = strtok(charBuf," ");  //tokenize
     
     // if we received message
     if(token)
@@ -82,14 +76,19 @@ void loop()
       Serial.print("Addressing module: ");
       Serial.println(atoi(token));
       
+      // Check to see if we are the module to process message
       if(atoi(token) == MODULE_ID)
       {
+        // strip that first signal
         token = strtok(NULL, " ");
         
+        // if next token is equal to 'M' for mode
         if(token[0] == 'M'){
           Serial.print("we have a: ");
           Serial.println(token[0]);
           token = strtok(NULL, " ");
+          
+          // Take next token to process it for something
           if(token)
           {
             modeIndex = atoi(token);
@@ -99,25 +98,28 @@ void loop()
           }
         }
         
+        // if not a modal change, then individually
+        // addressing steppers with 'S'
         else if(token[0] == 'S'){
           Serial.print("we have a: ");
           Serial.println(token[0]);
           token = strtok(NULL, " ");
           
-          // Parse according to stepper
+          // Parse according to which stepper
           while(token){
             Serial.print("We are on stepper ");
             Serial.println(token[0]);
-            
+            // which stepper
             motorIndex = atoi(token);
             token = strtok(NULL, " ");
+            // where is the stepper supposed to go
             motorInfo = atoi(token);
             token = strtok(NULL, " ");
             Serial.print("We use motor: ");
             Serial.print(motorIndex);
             Serial.print(". We are going to: ");
             Serial.println(motorInfo);
-            
+            // go there (function is in stepperControl)
             motorToPosition(motorIndex, motorInfo);
           }
           
