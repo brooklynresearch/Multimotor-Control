@@ -46,7 +46,7 @@ void setup()
   
   Serial.begin(115200);
   Serial.println("Hello world");
-  mySerial.begin(115200);
+  mySerial.begin(9600);
   dSPINConfig();
   stepperTime = millis();
 //  boardA.softStop();
@@ -68,6 +68,18 @@ void loop()
     // turn into charArray for processing
     inputString.toCharArray(charBuf,50);
     token = strtok(charBuf," ");  //tokenize
+    
+    /* Messaging Notes
+
+      Format is with space as delimiters with
+      commands ending with a newline.
+      For modes:
+      
+      MODULE_ID M MODE_ID
+
+      For direct stepper controls
+      MODULE_ID S STEPPER_ID STEPPER_LOCATION    
+    */
     
     // if we received message
     if(token)
@@ -145,18 +157,13 @@ void loop()
     inputString = "";
     stringComplete = false;  
   }
-}
-
-/*
-  SerialEvent occurs whenever a new data comes in the
- hardware serial RX.  This routine is run between each
- time loop() runs, so using delay inside loop can delay
- response.  Multiple bytes of data may be available.
- */
-void serialEvent() {
-  while (Serial.available()) {
+  
+  while (mySerial.available()) {
     // get the new byte:
-    char inChar = (char)Serial.read(); 
+//    char inChar = (char)Serial.read(); 
+    char inChar = (char)mySerial.read();
+    Serial.print("got char: ");
+    Serial.println(inChar);
     // add it to the inputString:
     inputString += inChar;
     // if the incoming character is a newline, set a flag
@@ -166,4 +173,28 @@ void serialEvent() {
     } 
   }
 }
+
+/*
+  SerialEvent occurs whenever a new data comes in the
+ hardware serial RX.  This routine is run between each
+ time loop() runs, so using delay inside loop can delay
+ response.  Multiple bytes of data may be available.
+ */
+//void serialEvent() {
+////  while (Serial.available()) {
+//  while (mySerial.available()) {
+//    // get the new byte:
+////    char inChar = (char)Serial.read(); 
+//    char inChar = (char)mySerial.read();
+//    Serial.print("got char: ");
+//    Serial.println(inChar);
+//    // add it to the inputString:
+//    inputString += inChar;
+//    // if the incoming character is a newline, set a flag
+//    // so the main loop can do something about it:
+//    if (inChar == '\n') {
+//      stringComplete = true;
+//    } 
+//  }
+//}
 
