@@ -161,10 +161,10 @@ void motorToPosition(int currentMotor, int targetStep){
   Serial.print("Current Motor is: ");
   Serial.println(currentMotor);
   Serial.print("TargetStep is: ");
-  Serial.print(targetStep);
+  Serial.println(targetStep);
   
   switch(currentMotor){
-    case 0:
+    case 0+MODULE_ID*NUM_BOARDS:
       Serial.print("Stepper 0: ");
       Serial.println(currentMotor);
       
@@ -184,7 +184,7 @@ void motorToPosition(int currentMotor, int targetStep){
       
       break;
   
-    case 1:
+    case 1+MODULE_ID*NUM_BOARDS:
       Serial.print("Stepper 1: ");
       Serial.println(currentMotor);
       if(boardB.getParam(ABS_POS) < targetStep){
@@ -201,7 +201,7 @@ void motorToPosition(int currentMotor, int targetStep){
       
       break;
       
-    case 2:
+    case 2+MODULE_ID*NUM_BOARDS:
       Serial.print("Stepper 2: ");
       Serial.println(currentMotor);
       if(boardC.getParam(ABS_POS) < targetStep){
@@ -217,7 +217,7 @@ void motorToPosition(int currentMotor, int targetStep){
       Serial.println(boardC.getParam(ABS_POS));
       break;
       
-    case 3:
+    case 3+MODULE_ID*NUM_BOARDS:
       Serial.print("Stepper 3: ");
       Serial.println(currentMotor);
       if(boardD.getParam(ABS_POS) < targetStep){
@@ -233,7 +233,7 @@ void motorToPosition(int currentMotor, int targetStep){
       Serial.println(boardD.getParam(ABS_POS));
       break;
   
-    case 4:
+    case 4+MODULE_ID*NUM_BOARDS:
       Serial.print("Stepper 4: ");
       Serial.println(currentMotor);
       if(boardE.getParam(ABS_POS) < targetStep){

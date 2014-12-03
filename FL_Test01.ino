@@ -1,10 +1,12 @@
 #include <AutoDriver.h>
 #include <SoftwareSerial.h>
 
-#define INPUT_SIZE 30
+#define _SS_MAX_RX_BUFF 128
+
+#define INPUT_SIZE 500
 #define NUM_BOARDS 5
 #define NUM_MODES 5
-#define MODULE_ID 0 // CHANGE THIS FOR EACH MODULE OF 5 MOTORS
+#define MODULE_ID 1 // CHANGE THIS FOR EACH MODULE OF 5 MOTORS
 
 // Create our AutoDriver instances. The parameters are pin numbers in
 //  Arduino-speke for CS, reset, and busy.
@@ -18,7 +20,7 @@ SoftwareSerial mySerial(3,2); // rx, tx
 int current_mode[NUM_MODES] = {0,1,2,3,4};
 char input[INPUT_SIZE + 1];
 char* token;
-char charBuf[50];
+char charBuf[INPUT_SIZE];
 
 String inputString = "";
 boolean stringComplete = false;
@@ -46,7 +48,7 @@ void setup()
   
   Serial.begin(115200);
   Serial.println("Hello world");
-  mySerial.begin(9600);
+  mySerial.begin(57600);
   dSPINConfig();
   stepperTime = millis();
 //  boardA.softStop();
@@ -66,7 +68,7 @@ void loop()
   if (stringComplete) {
     Serial.println(inputString);
     // turn into charArray for processing
-    inputString.toCharArray(charBuf,50);
+    inputString.toCharArray(charBuf,INPUT_SIZE);
     token = strtok(charBuf," ");  //tokenize
     
     /* Messaging Notes
@@ -89,7 +91,7 @@ void loop()
       Serial.println(atoi(token));
       
       // Check to see if we are the module to process message
-      if(atoi(token) == MODULE_ID)
+      if(true)
       {
         // strip that first signal
         token = strtok(NULL, " ");
@@ -160,7 +162,6 @@ void loop()
   
   while (mySerial.available()) {
     // get the new byte:
-//    char inChar = (char)Serial.read(); 
     char inChar = (char)mySerial.read();
     Serial.print("got char: ");
     Serial.println(inChar);
@@ -168,9 +169,15 @@ void loop()
     inputString += inChar;
     // if the incoming character is a newline, set a flag
     // so the main loop can do something about it:
-    if (inChar == '\n') {
+//    if (inChar == '\n') {
+//      stringComplete = true;
+//    }
+   if (inChar == 'z') {
+      Serial.println("See Z!");
       stringComplete = true;
-    } 
+//      mySerial.flush();
+//      break;
+    }  
   }
 }
 
@@ -181,11 +188,11 @@ void loop()
  response.  Multiple bytes of data may be available.
  */
 //void serialEvent() {
-////  while (Serial.available()) {
-//  while (mySerial.available()) {
+//  while (Serial.available()) {
+////  while (mySerial.available()) {
 //    // get the new byte:
-////    char inChar = (char)Serial.read(); 
-//    char inChar = (char)mySerial.read();
+//    char inChar = (char)Serial.read(); 
+////    char inChar = (char)mySerial.read();
 //    Serial.print("got char: ");
 //    Serial.println(inChar);
 //    // add it to the inputString:
