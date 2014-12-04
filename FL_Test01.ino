@@ -6,7 +6,7 @@
 #define INPUT_SIZE 500
 #define NUM_BOARDS 5
 #define NUM_MODES 5
-#define MODULE_ID 1  // CHANGE THIS FOR EACH MODULE OF 5 MOTORS
+#define MODULE_ID 0  // CHANGE THIS FOR EACH MODULE OF 5 MOTORS
 
 // Create our AutoDriver instances. The parameters are pin numbers in
 //  Arduino-speke for CS, reset, and busy.
@@ -49,6 +49,7 @@ void setup()
   Serial.begin(115200);
   Serial.println("Hello world");
   mySerial.begin(57600);
+  delay(1000);
   dSPINConfig();
   stepperTime = millis();
 //  boardA.softStop();
@@ -66,7 +67,7 @@ void loop()
 
   // When a newline is recevied and we have an entire message
   if (stringComplete) {
-    Serial.println(inputString);
+//    Serial.println(inputString);
     // turn into charArray for processing
     inputString.toCharArray(charBuf,INPUT_SIZE);
     token = strtok(charBuf," ");  //tokenize
@@ -87,8 +88,8 @@ void loop()
     if(token)
     {
       // if the message is directed to us
-      Serial.print("Addressing module: ");
-      Serial.println(atoi(token));
+//      Serial.print("Addressing module: ");
+//      Serial.println(atoi(token));
       
       // Check to see if we are the module to process message
       if(true)
@@ -98,24 +99,24 @@ void loop()
         
         // if next token is equal to 'M' for mode
         if(token[0] == 'M'){
-          Serial.print("we have a: ");
-          Serial.println(token[0]);
+//          Serial.print("we have a: ");
+//          Serial.println(token[0]);
           token = strtok(NULL, " ");
           
           // Take next token to process it for something
           if(token)
           {
             modeIndex = atoi(token);
-            Serial.print("Mode is: ");
-            Serial.println(modeIndex);
+//            Serial.print("Mode is: ");
+//            Serial.println(modeIndex);
             token = strtok(NULL, " ");
           }
         }
         
         // All steppers stopped
         else if(token[0] == 'H'){
-          Serial.print("we have a halt: ");
-          Serial.println(token[0]);
+//          Serial.print("we have a halt: ");
+//          Serial.println(token[0]);
           stepperSoftStop();
           token = strtok(NULL, " ");
         }
@@ -123,24 +124,24 @@ void loop()
         // if not a modal change, then individually
         // addressing steppers with 'S'
         else if(token[0] == 'S'){
-          Serial.print("we have a: ");
-          Serial.println(token[0]);
+//          Serial.print("we have a: ");
+//          Serial.println(token[0]);
           token = strtok(NULL, " ");
           
           // Parse according to which stepper
           while(token){
-            Serial.print("We are on stepper ");
-            Serial.println(token[0]);
+//            Serial.print("We are on stepper ");
+//            Serial.println(token[0]);
             // which stepper
             motorIndex = atoi(token);
             token = strtok(NULL, " ");
             // where is the stepper supposed to go
             motorInfo = atoi(token);
             token = strtok(NULL, " ");
-            Serial.print("We use motor: ");
-            Serial.print(motorIndex);
-            Serial.print(". We are going to: ");
-            Serial.println(motorInfo);
+//            Serial.print("We use motor: ");
+//            Serial.print(motorIndex);
+//            Serial.print(". We are going to: ");
+//            Serial.println(motorInfo);
             // go there (function is in stepperControl)
             if(motorInfo >= 0){
               motorToPosition(motorIndex, motorInfo);
@@ -148,11 +149,11 @@ void loop()
           }
           
           if(token){
-            Serial.print("extra token! is: ");
-            Serial.println(token[0]);
+//            Serial.print("extra token! is: ");
+//            Serial.println(token[0]);
           }
           else{
-            Serial.print("out of tokens, yes!"); 
+//            Serial.print("out of tokens, yes!"); 
           }
         }
       }
@@ -165,8 +166,8 @@ void loop()
   while (mySerial.available()) {
     // get the new byte:
     char inChar = (char)mySerial.read();
-    Serial.print("got char: ");
-    Serial.println(inChar);
+//    Serial.print("got char: ");
+//    Serial.println(inChar);
     // add it to the inputString:
     inputString += inChar;
     // if the incoming character is a newline, set a flag
@@ -175,7 +176,7 @@ void loop()
 //      stringComplete = true;
 //    }
    if (inChar == 'z') {
-      Serial.println("See z!");
+//      Serial.println("See z!");
       stringComplete = true;
 //      mySerial.flush();
 //      break;
