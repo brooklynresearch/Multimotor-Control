@@ -6,7 +6,7 @@
 #define INPUT_SIZE 500
 #define NUM_BOARDS 5
 #define NUM_MODES 5
-#define MODULE_ID 1 // CHANGE THIS FOR EACH MODULE OF 5 MOTORS
+#define MODULE_ID 1  // CHANGE THIS FOR EACH MODULE OF 5 MOTORS
 
 // Create our AutoDriver instances. The parameters are pin numbers in
 //  Arduino-speke for CS, reset, and busy.
@@ -173,7 +173,7 @@ void loop()
 //      stringComplete = true;
 //    }
    if (inChar == 'z') {
-      Serial.println("See Z!");
+      Serial.println("See z!");
       stringComplete = true;
 //      mySerial.flush();
 //      break;
