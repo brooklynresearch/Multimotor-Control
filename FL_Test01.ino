@@ -142,7 +142,9 @@ void loop()
             Serial.print(". We are going to: ");
             Serial.println(motorInfo);
             // go there (function is in stepperControl)
-            motorToPosition(motorIndex, motorInfo);
+            if(motorInfo >= 0){
+              motorToPosition(motorIndex, motorInfo);
+            }
           }
           
           if(token){
