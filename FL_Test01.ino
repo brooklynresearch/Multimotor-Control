@@ -1,3 +1,8 @@
+/*
+  For arduino controlling each node of five motors
+  Remember to change Module_ID for corresponding node, from 0 to 3
+*/
+
 #include <AutoDriver.h>
 #include <SoftwareSerial.h>
 
@@ -6,7 +11,7 @@
 #define INPUT_SIZE 500
 #define NUM_BOARDS 5
 #define NUM_MODES 5
-#define MODULE_ID 0  // CHANGE THIS FOR EACH MODULE OF 5 MOTORS
+#define MODULE_ID 2  // CHANGE THIS FOR EACH MODULE OF 5 MOTORS, From 0 to 3
 
 // Create our AutoDriver instances. The parameters are pin numbers in
 //  Arduino-speke for CS, reset, and busy.
@@ -58,8 +63,6 @@ void setup()
   boardC.resetPos();
   boardD.resetPos();
   boardE.resetPos();
-  char* command = strtok(input, "&");
-  
 }
 
 void loop()
@@ -67,7 +70,7 @@ void loop()
 
   // When a newline is recevied and we have an entire message
   if (stringComplete) {
-//    Serial.println(inputString);
+    Serial.println(inputString);
     // turn into charArray for processing
     inputString.toCharArray(charBuf,INPUT_SIZE);
     token = strtok(charBuf," ");  //tokenize
@@ -104,6 +107,7 @@ void loop()
           token = strtok(NULL, " ");
           
           // Take next token to process it for something
+          // To be used if we make predetermined movements
           if(token)
           {
             modeIndex = atoi(token);
@@ -138,23 +142,29 @@ void loop()
             // where is the stepper supposed to go
             motorInfo = atoi(token);
             token = strtok(NULL, " ");
-//            Serial.print("We use motor: ");
-//            Serial.print(motorIndex);
-//            Serial.print(". We are going to: ");
-//            Serial.println(motorInfo);
+            Serial.print("We use motor: ");
+            Serial.print(motorIndex);
+            Serial.print(". We are going to: ");
+            Serial.println(motorInfo);
             // go there (function is in stepperControl)
+            
+            // break before sending motor signals
+            if(token == NULL){
+              Serial.println("this is what");
+              break;
+            }
             if(motorInfo >= 0){
               motorToPosition(motorIndex, motorInfo);
             }
           }
           
-          if(token){
+//          if(token){
 //            Serial.print("extra token! is: ");
 //            Serial.println(token[0]);
-          }
-          else{
+//          }
+//          else{
 //            Serial.print("out of tokens, yes!"); 
-          }
+//          }
         }
       }
     }
@@ -166,8 +176,8 @@ void loop()
   while (mySerial.available()) {
     // get the new byte:
     char inChar = (char)mySerial.read();
-//    Serial.print("got char: ");
-//    Serial.println(inChar);
+    Serial.print("got char: ");
+    Serial.println(inChar);
     // add it to the inputString:
     inputString += inChar;
     // if the incoming character is a newline, set a flag

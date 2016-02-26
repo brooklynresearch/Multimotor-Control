@@ -165,8 +165,8 @@ void motorToPosition(int currentMotor, int targetStep){
   
   switch(currentMotor){
     case 0+MODULE_ID*NUM_BOARDS:
-//      Serial.print("Stepper 0: ");
-//      Serial.println(currentMotor);
+      Serial.print("Stepper 0: ");
+      Serial.println(currentMotor);
       
       // logic for how much to reverse or forward depending
       // on current position and desired position
@@ -177,16 +177,21 @@ void motorToPosition(int currentMotor, int targetStep){
         boardA.move(REV, boardA.getParam(ABS_POS) - targetStep);
       }
       
-//      Serial.print("Step location wanted: ");
-//      Serial.print(targetStep);
-//      Serial.print(", Step location at: ");
-//      Serial.println(boardA.getParam(ABS_POS));
+      else{
+        Serial.println("move zero");
+        boardA.move(FWD, 0); 
+      }
+      
+      Serial.print("Step location wanted: ");
+      Serial.print(targetStep);
+      Serial.print(", Step location at: ");
+      Serial.println(boardA.getParam(ABS_POS));
       
       break;
   
     case 1+MODULE_ID*NUM_BOARDS:
-//      Serial.print("Stepper 1: ");
-//      Serial.println(currentMotor);
+      Serial.print("Stepper 1: ");
+      Serial.println(currentMotor);
       if(boardB.getParam(ABS_POS) < targetStep){
         boardB.move(FWD, targetStep - boardB.getParam(ABS_POS));
       }
@@ -194,16 +199,16 @@ void motorToPosition(int currentMotor, int targetStep){
         boardB.move(REV, boardB.getParam(ABS_POS) - targetStep);
       }
       
-//      Serial.print("Step location wanted: ");
-//      Serial.print(stepLocation);
-//      Serial.print(", Step location at: ");
-//      Serial.println(boardB.getParam(ABS_POS));
+      Serial.print("Step location wanted: ");
+      Serial.print(stepLocation);
+      Serial.print(", Step location at: ");
+      Serial.println(boardB.getParam(ABS_POS));
       
       break;
       
     case 2+MODULE_ID*NUM_BOARDS:
-//      Serial.print("Stepper 2: ");
-//      Serial.println(currentMotor);
+      Serial.print("Stepper 2: ");
+      Serial.println(currentMotor);
       if(boardC.getParam(ABS_POS) < targetStep){
         boardC.move(FWD, targetStep - boardC.getParam(ABS_POS));
       }
@@ -218,8 +223,8 @@ void motorToPosition(int currentMotor, int targetStep){
       break;
       
     case 3+MODULE_ID*NUM_BOARDS:
-//      Serial.print("Stepper 3: ");
-//      Serial.println(currentMotor);
+      Serial.print("Stepper 3: ");
+      Serial.println(currentMotor);
       if(boardD.getParam(ABS_POS) < targetStep){
         boardD.move(FWD, targetStep - boardD.getParam(ABS_POS));
       }
@@ -227,15 +232,15 @@ void motorToPosition(int currentMotor, int targetStep){
         boardD.move(REV, boardD.getParam(ABS_POS) - targetStep);
       }
       
-//      Serial.print("Step location wanted: ");
-//      Serial.print(targetStep);
-//      Serial.print(", Step location at: ");
-//      Serial.println(boardD.getParam(ABS_POS));
+      Serial.print("Step location wanted: ");
+      Serial.print(targetStep);
+      Serial.print(", Step location at: ");
+      Serial.println(boardD.getParam(ABS_POS));
       break;
   
     case 4+MODULE_ID*NUM_BOARDS:
-//      Serial.print("Stepper 4: ");
-//      Serial.println(currentMotor);
+      Serial.print("Stepper 4: ");
+      Serial.println(currentMotor);
       if(boardE.getParam(ABS_POS) < targetStep){
         boardE.move(FWD, targetStep - boardE.getParam(ABS_POS));
       }
@@ -243,10 +248,10 @@ void motorToPosition(int currentMotor, int targetStep){
         boardE.move(REV, boardE.getParam(ABS_POS) - targetStep);
       }
       
-//      Serial.print("Step location wanted: ");
-//      Serial.print(targetStep);
-//      Serial.print(", Step location at: ");
-//      Serial.println(boardE.getParam(ABS_POS));
+      Serial.print("Step location wanted: ");
+      Serial.print(targetStep);
+      Serial.print(", Step location at: ");
+      Serial.println(boardE.getParam(ABS_POS));
       break;
   
     default:

@@ -8,7 +8,7 @@
 
 
 byte myMac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-byte myIp[]  = { 192, 168, 0, 177 };
+byte myIp[]  = { 192, 168, 0, 178 };
 int  serverPort  = 10000;
 
 SoftwareSerial motorSerial01(4, 5); // RX, TX
@@ -315,60 +315,60 @@ void motorTest02(OSCMessage *_mes){
 //  int motor07 = _mes->getArgInt32(7);
 //  int motor08 = _mes->getArgInt32(8);
 //  int motor09 = _mes->getArgInt32(9);
-//  int motor10 = _mes->getArgInt32(10);
-//  int motor11 = _mes->getArgInt32(11);
-//  int motor12 = _mes->getArgInt32(12);
-//  int motor13 = _mes->getArgInt32(13);
-//  int motor14 = _mes->getArgInt32(14);
-//  int motor15 = _mes->getArgInt32(15);
-//  int motor16 = _mes->getArgInt32(16);
-//  int motor17 = _mes->getArgInt32(17);
-//  int motor18 = _mes->getArgInt32(18);
-//  int motor19 = _mes->getArgInt32(19);
+  int motor10 = _mes->getArgInt32(0);
+  int motor11 = _mes->getArgInt32(1);
+  int motor12 = _mes->getArgInt32(2);
+  int motor13 = _mes->getArgInt32(3);
+  int motor14 = _mes->getArgInt32(4);
+  int motor15 = _mes->getArgInt32(5);
+  int motor16 = _mes->getArgInt32(6);
+  int motor17 = _mes->getArgInt32(7);
+  int motor18 = _mes->getArgInt32(8);
+  int motor19 = _mes->getArgInt32(9);
   
-  int motor00 = 0;
-  int motor01 = 0;
-  int motor02 = 0;
-  int motor03 = 0;
-  int motor04 = 0;
-  int motor05 = 0;
-  int motor06 = 0;
-  int motor07 = 0;
-  int motor08 = 0;
-  int motor09 = 0;
-  int motor10 = 0;
-  int motor11 = 0;
-  int motor12 = 0;
-  int motor13 = 0;
-  int motor14 = 0;
-  int motor15 = 0;
-  int motor16 = 0;
-  int motor17 = 0;
-  int motor18 = 0;
-  int motor19 = 0;
- 
- 
-  motorControls01 += " 0 ";
-  motorControls01 += motor00;
-  motorControls01 += " 1 ";
-  motorControls01 += motor01;
-  motorControls01 += " 2 ";
-  motorControls01 += motor02;
-  motorControls01 += " 3 ";
-  motorControls01 += motor03;
-  motorControls01 += " 4 ";
-  motorControls01 += motor04; 
-  motorControls01 += " 5 ";
-  motorControls01 += motor05;
-  motorControls01 += " 6 ";
-  motorControls01 += motor06;
-  motorControls01 += " 7 ";
-  motorControls01 += motor07;
-  motorControls01 += " 8 ";
-  motorControls01 += motor08;
-  motorControls01 += " 9 ";
-  motorControls01 += motor09;
-  motorControls01 += " z";
+//  int motor00 = 0;
+//  int motor01 = 0;
+//  int motor02 = 0;
+//  int motor03 = 0;
+//  int motor04 = 0;
+//  int motor05 = 0;
+//  int motor06 = 0;
+//  int motor07 = 0;
+//  int motor08 = 0;
+//  int motor09 = 0;
+//  int motor10 = 0;
+//  int motor11 = 0;
+//  int motor12 = 0;
+//  int motor13 = 0;
+//  int motor14 = 0;
+//  int motor15 = 0;
+//  int motor16 = 0;
+//  int motor17 = 0;
+//  int motor18 = 0;
+//  int motor19 = 0;
+// 
+// 
+//  motorControls01 += " 0 ";
+//  motorControls01 += motor00;
+//  motorControls01 += " 1 ";
+//  motorControls01 += motor01;
+//  motorControls01 += " 2 ";
+//  motorControls01 += motor02;
+//  motorControls01 += " 3 ";
+//  motorControls01 += motor03;
+//  motorControls01 += " 4 ";
+//  motorControls01 += motor04; 
+//  motorControls01 += " 5 ";
+//  motorControls01 += motor05;
+//  motorControls01 += " 6 ";
+//  motorControls01 += motor06;
+//  motorControls01 += " 7 ";
+//  motorControls01 += motor07;
+//  motorControls01 += " 8 ";
+//  motorControls01 += motor08;
+//  motorControls01 += " 9 ";
+//  motorControls01 += motor09;
+//  motorControls01 += " z";
 
   motorControls02 += " 10 ";
   motorControls02 += motor10;
